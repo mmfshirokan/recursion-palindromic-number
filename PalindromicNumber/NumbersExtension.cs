@@ -15,25 +15,29 @@ namespace PalindromicNumberTask
         /// <exception cref="ArgumentException"> Thrown when source number is less than zero. </exception>
         public static bool IsPalindromicNumber(int number)
         {
-            int digitnum = (int)Math.Log10(number) + 1;
             if (number < 0)
             {
                 throw new ArgumentException("number cannot be less than zero");
             }
 
-            if (number < 10 & number >= 0)
+            return IsPalindromicNumberLocalFun(number);
+            bool IsPalindromicNumberLocalFun(int numbeR)
             {
-                return true;
-            }
-            else if (number % 10 == number / (int)Math.Pow(10, digitnum - 1))
-            {
-                number = number - (number / (int)Math.Pow(10, digitnum - 1) * (int)Math.Pow(10, digitnum - 1));
-                number /= 10;
-                return IsPalindromicNumber(number);
-            }
-            else
-            {
-                return false;
+                int digitnum = (int)Math.Log10(numbeR) + 1;
+                if (numbeR < 10 & numbeR >= 0)
+                  {
+                      return true;
+                  }
+                  else if (numbeR % 10 == numbeR / (int)Math.Pow(10, digitnum - 1))
+                  {
+                      numbeR = numbeR % (int)Math.Pow(10, digitnum - 1);
+                      numbeR /= 10;
+                      return IsPalindromicNumberLocalFun(numbeR);
+                  }
+                  else
+                  {
+                      return false;
+                  }
             }
         }
     }
